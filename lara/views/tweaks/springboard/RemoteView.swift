@@ -25,6 +25,7 @@ struct RemoteView: View {
     @State private var hsColumns: Int = 4
     @State private var freakyrunning: Bool = false
     @State private var freakyseq: Int = 0
+    @State private var menuWindow: UInt64 = 0
 
     private var dockMaxColumns: Int { rcdockunlimited ? 50 : 10 }
 
@@ -158,6 +159,20 @@ struct RemoteView: View {
                 } label: {
                     Text("Enable UIKit Debug Overlay")
                 }
+                
+                Button {
+    run("Custom Menu") {
+        if menuWindow == 0 {
+            menuWindow = enable_custom_menu(mgr.sbProc)
+            return "enable_custom_menu() -> 0x\(String(menuWindow, radix: 16))"
+        } else {
+            toggle_custom_menu(mgr.sbProc, menuWindow)
+            return "toggle_custom_menu() done"
+        }
+    }
+} label: {
+    Text(menuWindow == 0 ? "Show Menu" : "Toggle Menu")
+}
 
                 /*
                 Button {

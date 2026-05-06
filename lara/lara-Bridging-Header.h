@@ -14,6 +14,7 @@
 #import "sbx.h"
 #import "rc.h"
 #import "RemoteCall.h"
+#import "kexploit/pe/rc_overlay.h"
 
 long FindCacheDataOffset(const char *mgKey);
 
