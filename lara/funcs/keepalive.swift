@@ -66,7 +66,7 @@ private func makesilentwav(at url: URL) {
     let chunksize = 36 + datasize
     
     func append<T>(_ value: T) {
-        var v = value
+        let v = value
         wavdata.append(withUnsafeBytes(of: v) { Data($0) })
     }
     

@@ -477,8 +477,10 @@ final class laramgr: ObservableObject {
     func PPHelper() -> Bool {
         do {
             let fm = FileManager.default
+            _ = fm
             let dataFolder = "/private/var/mobile/Containers/Data/Application"
             let bundleFolder = "/private/var/containers/Bundle/Application"
+            _ = bundleFolder
             var bundleIDs = ["com.apple.PosterBoard"]
             if UIDevice.current.userInterfaceIdiom == .phone {
                 bundleIDs.append("com.apple.CarPlayWallpaper")
@@ -524,8 +526,10 @@ final class laramgr: ObservableObject {
 
     func getAppList() -> [String:AppInfo]? {
         let fm = FileManager.default
+            _ = fm
         let dataFolder = "/private/var/mobile/Containers/Data/Application"
         let bundleFolder = "/private/var/containers/Bundle/Application"
+            _ = bundleFolder
         var appList: [String:AppInfo] = [:]
         do {
             let appData = try fm.contentsOfDirectory(atPath: dataFolder)
