@@ -393,17 +393,21 @@ struct RemoteView: View {
                         defer { proc.destroy() }
 
                         var argsCopy = args
-                        let ret = function.withCString { (cName: UnsafePointer<CChar>) -> UInt64 in
-                            UInt64(argsCopy.withUnsafeMutableBufferPointer { buffer in
-                                proc.doStable(
-                                    withTimeout: Int32(customTimeoutMs),
-                                    functionName: UnsafeMutablePointer(mutating: cName),
-                                    functionPointer: ptr,
-                                    args: buffer.baseAddress,
-                                    argCount: UInt(args.count)
-                                )
-                            })
-                        }
+                        // Создаем изменяемую копию строки в виде массива CChar (Int8)
+var cName = function.cString(using: .utf8) ?? []
+let ret = cName.withUnsafeMutableBufferPointer { nameBuffer -> UInt64 in
+    guard let namePtr = nameBuffer.baseAddress else { return 0 }
+    
+    return UInt64(argsCopy.withUnsafeMutableBufferPointer { buffer in
+        proc.doStable(
+            withTimeout: Int32(customTimeoutMs),
+            functionName: namePtr, // Теперь это честный UnsafeMutablePointer
+            functionPointer: ptr,
+            args: buffer.baseAddress,
+            argCount: UInt(args.count)
+        )
+    })
+}
 
                         let err = proc.lastError ?? ""
                         let suffix = err.isEmpty ? "" : " (err: \(err))"
