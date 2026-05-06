@@ -285,7 +285,7 @@ struct EditorView: View {
         )
     }
 
-    private func mgkeybinding<T: Equatable>(_ keys: [String], type: T.Type = Int.self, default: T? = 0, enable: T? = 1) -> Binding<Bool> {
+    private func mgkeybinding<T: Equatable>(_ keys: [String], type: T.Type, default: T?, enable: T?) -> Binding<Bool> {
         guard let cachextra = mg["CacheExtra"] as? NSMutableDictionary else {
             return State(initialValue: false).projectedValue
         }

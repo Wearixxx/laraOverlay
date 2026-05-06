@@ -241,7 +241,7 @@ class Logger: ObservableObject {
     }
 
     private func appendraw(_ chunk: String) {
-        var text = panding + chunk
+        let text = panding + chunk
         var lines = text.components(separatedBy: "\n")
         panding = lines.removeLast()
         if !lines.isEmpty {
