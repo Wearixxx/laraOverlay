@@ -306,7 +306,7 @@ class Logger: ObservableObject {
         ])
         
         logfilehandle = try? FileHandle(forWritingTo: url)
-        _ = try? logfilehandle?.seekToEnd()
+        _ = _ = try? logfilehandle?.seekToEnd()
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -329,7 +329,7 @@ class Logger: ObservableObject {
             ])
         }
         logfilehandle = try? FileHandle(forWritingTo: url)
-        _ = try? logfilehandle?.seekToEnd()
+        _ = _ = try? logfilehandle?.seekToEnd()
     }
 
     private func appendtofile(_ lines: [String]) {
